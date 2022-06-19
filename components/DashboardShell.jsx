@@ -1,61 +1,60 @@
 import React from 'react';
-import {
-  Flex,
-  Stack,
-  Link,
-  Avatar,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Heading,
-  Box,
-  Text,
-  Button,
-} from '@chakra-ui/react';
-import { Logo } from '../constants/Icons';
+import NextLink from 'next/link';
+import { Box, Button, Flex, Link, Avatar } from '@chakra-ui/react';
+import { Logo } from 'constants/Icons';
 
-const DashboardShell = ({ children }) => (
-  <Flex flexDirection="column">
-    <Flex
-      justifyContent="space-between"
-      alignItems="center"
-      backgroundColor="white"
-      opacity={0.97}
-      p={4}
-    >
-      <Stack spacing={2} isInline justifyContent="center" alignItems="center">
-        <Logo color="black" size="32px" />
-        <Link>Sites</Link>
-        <Link>Feedback</Link>
-      </Stack>
-      <Flex alignItems="center">
-        <Link mr={4}>Account</Link>
-        <Avatar />
-      </Flex>
-    </Flex>
-    <Flex backgroundColor="gray.100" p={8} height="100%">
+import { useAuth } from '@/lib/auth';
+// import Footer from './Footer';
+
+const DashboardShell = ({ children }) => {
+  const { user } = useAuth();
+
+  return (
+    <Box backgroundColor="gray.100" h="100vh">
       <Flex
-        alignItems="stretch"
-        justifyContent="flex-start"
-        maxWidth="800px"
-        ml="auto"
-        mr="auto"
-        flexDirection="row"
+        backgroundColor="white"
+        mb={[8, 16]}
+        w="full"
+        borderTop="5px solid #0AF5F4"
       >
-        <Breadcrumb />
-        <Breadcrumb />
-        <Flex flexDirection="column">
-          <Breadcrumb>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink>Sites</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <Heading>Sites</Heading>
-          { children }
+        <Flex
+          alignItems="center"
+          justifyContent="center"
+          py="4"
+          maxW="1250px"
+          margin="0 auto"
+          w="full"
+          px="8"
+          h="60px"
+        >
+          <Flex align="center">
+            <NextLink href="/" passHref>
+              <Link>
+                <Logo name="logo" boxSize="24px" mr="8" />
+              </Link>
+            </NextLink>
+            <NextLink href="/sites" passHref>
+              <Link>Sites</Link>
+            </NextLink>
+            <NextLink href="/feedback" passHref>
+              <Link>Feedback</Link>
+            </NextLink>
+          </Flex>
+          <Flex justifyContent="center" alignItems="center">
+            <NextLink href="/account" passHref>
+              <Link>
+                <Avatar size="sm" src={user?.photoUrl} />
+              </Link>
+            </NextLink>
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
-  </Flex>
-);
+      <Flex margin="0 auto" direction="column" maxW="1250px" px={[0, 8, 8]}>
+        {children}
+      </Flex>
+      {/* <Footer/> */}
+    </Box>
+  );
+};
 
 export default DashboardShell;
