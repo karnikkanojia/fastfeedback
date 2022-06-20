@@ -4,7 +4,7 @@ import { Box, Button, Flex, Link, Avatar } from '@chakra-ui/react';
 import { Logo } from 'constants/Icons';
 
 import { useAuth } from '@/lib/auth';
-// import Footer from './Footer';
+import Footer from './Footer';
 
 const DashboardShell = ({ children }) => {
   const { user } = useAuth();
@@ -19,7 +19,7 @@ const DashboardShell = ({ children }) => {
       >
         <Flex
           alignItems="center"
-          justifyContent="center"
+          justifyContent="space-between"
           py="4"
           maxW="1250px"
           margin="0 auto"
@@ -27,14 +27,14 @@ const DashboardShell = ({ children }) => {
           px="8"
           h="60px"
         >
-          <Flex align="center">
+          <Flex align="center" justify="space-between">
             <NextLink href="/" passHref>
               <Link>
                 <Logo name="logo" boxSize="24px" mr="8" />
               </Link>
             </NextLink>
             <NextLink href="/sites" passHref>
-              <Link>Sites</Link>
+              <Link pr="8">Sites</Link>
             </NextLink>
             <NextLink href="/feedback" passHref>
               <Link>Feedback</Link>
@@ -52,7 +52,7 @@ const DashboardShell = ({ children }) => {
       <Flex margin="0 auto" direction="column" maxW="1250px" px={[0, 8, 8]}>
         {children}
       </Flex>
-      {/* <Footer/> */}
+      <Footer />
     </Box>
   );
 };

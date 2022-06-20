@@ -33,3 +33,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Secret Key
+fastfeedback-73cd1-firebase-adminsdk-kgiiy-5de3e8156b.json

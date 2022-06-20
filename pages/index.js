@@ -3,6 +3,8 @@ import { useAuth } from '@/lib/auth';
 import styles from '../styles/Home.module.css';
 import { Button, Heading, Text, Code, Icon, Flex } from '@chakra-ui/react';
 import { Github, Google, Logo } from '../constants/Icons';
+import SiteEmptyState from '@/components/SiteEmptyState';
+import FreePlanEmptyState from '@/components/FreePlanEmptyState';
 
 export default function Home() {
   const auth = useAuth();
@@ -23,7 +25,10 @@ export default function Home() {
           Current User: <Code>{auth.user ? auth.user.email : 'None'}</Code>
         </Text>
         {auth.user ? (
-          <Button onClick={(e) => auth.signOut()}>Sign Out</Button>
+          <>
+            <SiteEmptyState />
+            <Button onClick={(e) => auth.signOut()}>Sign Out</Button>
+          </>
         ) : (
           <Button mt={4} size="sm" onClick={(e) => auth.signInWithGithub()}>
             Sign In
